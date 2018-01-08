@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Main {
 
@@ -45,10 +48,28 @@ public class Main {
 		System.out.println(records);
 	}
 
-	//Remove All Difficult Questions
+	// Remove All Difficult Questions
 	private void removeAllDifficultQuestions() {
 		questions.removeIf(e -> e.getQuestionType() == QuestionType.DIFFICULT);
 		System.out.println("No of remaining questions :" + questions.size());
+	}
+
+	// ListToMapConversion
+	private void listToMapConversion() {
+		System.out.println(questions.stream().collect(Collectors.toMap(Question::getId, Function.identity())));
+	}
+
+	// StreamToArrayConversion
+	private void streamToArrayConversion() {
+		Stream<String> strStream = Stream.of("A", "B", "C", "D");
+		String[] data = strStream.toArray(size -> new String[size]);
+		System.out.println("Array's size and first Element-> " + data.length + " : " + data[0]);
+	}
+
+	// IterableToStreamConversion
+	private void iterableToStreamConversion() {
+		Iterable<Question> iterableData = questions;
+		StreamSupport.stream(iterableData.spliterator(), false).forEach(System.out::println);
 	}
 
 	public static void main(String args[]) {
@@ -57,6 +78,9 @@ public class Main {
 		obj.showQuestionsWhereIdGt3();
 		obj.retreiveOnlyQuestionTexts();
 		obj.sortQuestionsById();
+		obj.listToMapConversion();
+		obj.streamToArrayConversion();
+		obj.iterableToStreamConversion();
 		obj.removeAllDifficultQuestions();
 	}
 }
