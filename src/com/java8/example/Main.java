@@ -72,6 +72,29 @@ public class Main {
 		StreamSupport.stream(iterableData.spliterator(), false).forEach(System.out::println);
 	}
 
+	// StreamToIterableConversion
+	private void streamToIterableConversion() {
+		Stream<String> strStream = Stream.of("A", "B", "C", "D");
+		Iterable<String> strIterable = strStream::iterator;
+		for (String str : strIterable) {
+			System.out.println(str);
+		}
+	}
+
+	// GetFirstItem
+	private void getFirstItem() {
+		System.out.println(
+				questions.stream().filter(e -> e.getQuestionType() == QuestionType.DIFFICULT).findFirst().get());
+	}
+
+	// GetSumOfAllIds
+	private void getSumOfAllIds() {
+		System.out.println(questions.stream().mapToLong(Question::getId).sum());
+		//OR
+		long result=questions.stream().collect(Collectors.summingLong(Question::getId));
+		System.out.println(result);
+	}
+
 	public static void main(String args[]) {
 		Main obj = new Main();
 		obj.groupQuestionsByQuestionTypes();
@@ -81,6 +104,10 @@ public class Main {
 		obj.listToMapConversion();
 		obj.streamToArrayConversion();
 		obj.iterableToStreamConversion();
+		obj.getFirstItem();
+		obj.streamToIterableConversion();
+		obj.getSumOfAllIds();
 		obj.removeAllDifficultQuestions();
+
 	}
 }
