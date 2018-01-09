@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -90,9 +91,20 @@ public class Main {
 	// GetSumOfAllIds
 	private void getSumOfAllIds() {
 		System.out.println(questions.stream().mapToLong(Question::getId).sum());
-		//OR
-		long result=questions.stream().collect(Collectors.summingLong(Question::getId));
+		// OR
+		long result = questions.stream().collect(Collectors.summingLong(Question::getId));
 		System.out.println(result);
+	}
+
+	// GetSumOfTwoArrays
+	private void getSumOfTwoArrays() {
+		int[] a = { 1, 2, 3 };
+		int[] b = { 4, 5, 6 };
+
+		int[] result = new int[a.length];
+
+		IntStream.range(0, a.length).forEach(i -> result[i] = a[i] + b[i]);
+		System.out.println(result[0]);
 	}
 
 	public static void main(String args[]) {
@@ -107,6 +119,7 @@ public class Main {
 		obj.getFirstItem();
 		obj.streamToIterableConversion();
 		obj.getSumOfAllIds();
+		obj.getSumOfTwoArrays();
 		obj.removeAllDifficultQuestions();
 
 	}
