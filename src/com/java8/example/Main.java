@@ -2,6 +2,7 @@ package com.java8.example;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -107,6 +108,25 @@ public class Main {
 		System.out.println(result[0]);
 	}
 
+	// ThrowCustomExceptionUsingStream
+	private void throwCustomExceptionUsingStream() {
+		try {
+			questions.stream().filter(e -> e.getId() > 10).findFirst()
+					.orElseThrow(() -> new Exception("Custom Parameter"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// ToMapWithNullKey
+	private void toMapWithNullKey() {
+		questions.get(1).setId(null);
+		Map<Long, String> collect = questions.stream().collect(HashMap::new, (m, v) -> m.put(v.getId(), v.getText()),
+				HashMap::putAll);
+		System.out.println(collect);
+	}
+
 	public static void main(String args[]) {
 		Main obj = new Main();
 		obj.groupQuestionsByQuestionTypes();
@@ -121,6 +141,8 @@ public class Main {
 		obj.getSumOfAllIds();
 		obj.getSumOfTwoArrays();
 		obj.removeAllDifficultQuestions();
+		obj.throwCustomExceptionUsingStream();
+		obj.toMapWithNullKey();
 
 	}
 }
