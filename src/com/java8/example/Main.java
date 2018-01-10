@@ -97,6 +97,19 @@ public class Main {
 		System.out.println(result);
 	}
 
+	// mapToInt
+	private void mapToInt() {
+			questions.stream().map(e->e.getText().replace("Question ", "")).mapToInt(Integer::parseInt).forEach(System.out::println);
+			//Similar Way, WE Can Use mapToLong, mapToDouble, mapToObject
+
+	}
+
+	// IntStreamExample
+	private void intStreamExample() {
+		IntStream.range(0, 3).forEach(System.out::println);
+		//Similar Way, WE Can Use LongStream, DoubleStream
+	}
+
 	// GetSumOfTwoArrays
 	private void getSumOfTwoArrays() {
 		int[] a = { 1, 2, 3 };
@@ -139,6 +152,8 @@ public class Main {
 		obj.getFirstItem();
 		obj.streamToIterableConversion();
 		obj.getSumOfAllIds();
+		obj.intStreamExample();
+		obj.mapToInt();
 		obj.getSumOfTwoArrays();
 		obj.removeAllDifficultQuestions();
 		obj.throwCustomExceptionUsingStream();
